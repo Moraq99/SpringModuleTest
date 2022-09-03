@@ -3,9 +3,17 @@ package app.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-public class Officer {
+@Entity
+public class Officer implements OfficerInter {
+
+    @Id
+    @GeneratedValue
+    private long id;
 
     private String username;
 
@@ -17,6 +25,11 @@ public class Officer {
 
     public Officer() {}
 
+    public Officer(long id) {
+        this.id = id;
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -33,6 +46,7 @@ public class Officer {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -41,6 +55,7 @@ public class Officer {
         this.password = password;
     }
 
+    @Override
     public LocalDateTime getWorkStart() {
         return workStart;
     }
@@ -49,11 +64,21 @@ public class Officer {
         this.workStart = workStart;
     }
 
+    @Override
     public LocalDateTime getWorkEnd() {
         return workEnd;
     }
 
     public void setWorkEnd(LocalDateTime workEnd) {
         this.workEnd = workEnd;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
